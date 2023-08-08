@@ -14,8 +14,9 @@ export default {
       'quternary-blue': '#DAFFFB',
       'white': '#ffffff',
       'silver': '#ecebff',
-      'bubble-gum': '#ff77e9',
+      'black': '#000000',
       'bermuda': '#78dcca',
+      'red': '#FF2346',
     },
     fontFamily: {
       inter: ["Inter", "sans-serif"],
