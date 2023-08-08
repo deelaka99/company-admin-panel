@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
-import AdminHome from "./components/admin/AdminHome";
+import AdminHome from "./pages/admin/AdminHome";
+import Login from "./pages/Login";
+import { BrowserRouter as Router} from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
 
 function App() {
-  
-
   return (
-    <>
-      <AdminHome />
-    </>
+    <Router>
+      <div>
+        <section>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/admin-home" element={<AdminHome />} />
+          </Routes>
+        </section>
+      </div>
+    </Router>
   );
 }
 
