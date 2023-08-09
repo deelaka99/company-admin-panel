@@ -1,6 +1,7 @@
 import React from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
+import {Link} from "react-router-dom";
 
 const Dashboard = () => {
   return (
@@ -34,9 +35,9 @@ const Dashboard = () => {
                     <h1 className="text-8xl font-bold">255</h1>
                   </div>
                   <div className="w-full h-1/6 flex items-center justify-center">
-                    <a href="#" className="hover:text-bermuda text-xl">
+                    <Link to="/admin/management"><a href="#" className="hover:text-bermuda text-xl">
                       Manage Labs...
-                    </a>
+                    </a></Link>
                   </div>
                 </div>
                 <div className="h-full w-1/5"></div>
@@ -48,9 +49,9 @@ const Dashboard = () => {
                     <h1 className="text-8xl font-bold">55</h1>
                   </div>
                   <div className="w-full h-1/6 flex items-center justify-center">
-                    <a href="#" className="hover:text-bermuda text-xl">
+                    <Link to="/admin/management"><a href="#" className="hover:text-bermuda text-xl">
                       Manage Labs...
-                    </a>
+                    </a></Link>
                   </div>
                 </div>
               </div>
