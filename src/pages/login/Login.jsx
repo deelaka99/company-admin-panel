@@ -1,6 +1,6 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import { auth } from "../firebase";
+import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -23,7 +23,7 @@ const Login = () => {
   };
 
   useEffect(()=>{
-    if(user) navigate("/admin-home")
+    if(user) navigate("/admin/dashboard")
   },[user]);
 
   return (
