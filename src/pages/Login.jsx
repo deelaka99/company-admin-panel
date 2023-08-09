@@ -9,6 +9,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const signIn = (e) => {
     e.preventDefault();
@@ -17,7 +18,7 @@ const Login = () => {
         console.log(userCredential);
       })
       .catch((error) => {
-        console.log(error);
+        setError(true);
       });
   };
 
@@ -49,7 +50,7 @@ const Login = () => {
                   className="flex flex-col items-center justify-center w-full p-8"
                 >
                   <input
-                    className="p-3 w-full bg-ternary-blue rounded-full text-center text-lg"
+                    className="p-3 w-full bg-ternary-blue rounded-full text-center text-lg text-primary-blue"
                     type="email"
                     placeholder="Email"
                     value={email}
@@ -58,13 +59,16 @@ const Login = () => {
                   />
                   <br />
                   <input
-                    className="p-3 w-full bg-ternary-blue rounded-full text-center text-lg"
+                    className="p-3 w-full bg-ternary-blue rounded-full text-center text-lg text-primary-blue"
                     type="password"
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <br />
+                  <div className="text-red font-bold p-3">
+                    {error && <span>Invalid Email or Password!</span>}
+                  </div>
                   <button
                     type="submit"
                     className="p-2 w-2/3 bg-quternary-blue rounded-full text-white text-2xl border-4 hover:bg-black"
