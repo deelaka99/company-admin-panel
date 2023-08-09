@@ -15,7 +15,9 @@ import {
 import logo from "../../assets/images/logo.png";
 import { auth, logout } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+
+import Dashboard from "../../components/dashboard/Dashboard";
 
 const AdminHome = () => {
   const [theme, setTheme] = useState("light");
@@ -191,7 +193,7 @@ const AdminHome = () => {
 
         {/* body */}
         <div className=" w-full h-full flex items-center justify-center dark:text-white">
-          -body-
+          <Dashboard />
         </div>
       </div>
     </div>
