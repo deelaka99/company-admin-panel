@@ -15,7 +15,7 @@ import {
 import logo from "../../assets/images/logo.png";
 import { auth, logout } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate, Link } from "react-router-dom";
 
 import Dashboard from "../../components/dashboard/Dashboard";
 
@@ -66,24 +66,32 @@ const AdminHome = () => {
         <div className="h-3/5 w-full">
           <div className="flex flex-col ">
             <a href="#" className="text-3xl text-white font-inter">
+              <Link to="/admin-home/dashboard">
               <div className="hover:bg-secondary-blue p-7 dark:hover:bg-dark-secondary">
                 <FontAwesomeIcon icon={faTableCellsLarge} /> &nbsp;Dashboard
               </div>
+              </Link>
             </a>
             <a href="#" className="text-3xl text-white font-inter">
+              <Link to="/admin-home/management">
               <div className="hover:bg-secondary-blue p-7 dark:hover:bg-dark-secondary">
                 <FontAwesomeIcon icon={faCube} /> &nbsp;Management
               </div>
+              </Link>
             </a>
             <a href="#" className="text-3xl text-white font-inter">
+              <Link to="/admin-home/profile">
               <div className="hover:bg-secondary-blue p-7 dark:hover:bg-dark-secondary">
                 <FontAwesomeIcon icon={faUser} /> &nbsp;Profile
               </div>
+              </Link>
             </a>
             <a href="#" className="text-3xl text-white font-inter">
+              <Link to="/admin-home/settings">
               <div className="hover:bg-secondary-blue p-7 dark:hover:bg-dark-secondary">
                 <FontAwesomeIcon icon={faGear} /> &nbsp;Settings
               </div>
+              </Link>
             </a>
           </div>
         </div>
@@ -194,6 +202,7 @@ const AdminHome = () => {
         {/* body */}
         <div className=" w-full h-full flex items-center justify-center dark:text-white">
           <Dashboard />
+          
         </div>
       </div>
     </div>
