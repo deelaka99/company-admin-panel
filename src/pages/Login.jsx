@@ -50,7 +50,7 @@ const Login = () => {
                   className="flex flex-col items-center justify-center w-full p-8"
                 >
                   <input
-                    className="p-3 w-full bg-ternary-blue rounded-full text-center text-lg text-primary-blue"
+                    className="p-3 w-full bg-ternary-blue rounded-full text-center text-lg text-primary-blue font-medium"
                     type="email"
                     placeholder="Email"
                     value={email}
@@ -59,7 +59,7 @@ const Login = () => {
                   />
                   <br />
                   <input
-                    className="p-3 w-full bg-ternary-blue rounded-full text-center text-lg text-primary-blue"
+                    className="p-3 w-full bg-ternary-blue rounded-full text-center text-lg text-primary-blue font-medium"
                     type="password"
                     placeholder="Password"
                     value={password}

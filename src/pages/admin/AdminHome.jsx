@@ -13,13 +13,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import logo from "../../assets/images/logo.png";
-import { auth,logout } from "../../firebase";
+import { auth, logout } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 
 const AdminHome = () => {
   const [theme, setTheme] = useState("light");
   const [isOpen, setIsOpen] = useState(false);
+  const [admin, setAdmin] = useState(null);
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
 
@@ -30,6 +31,18 @@ const AdminHome = () => {
     } else {
       document.documentElement.classList.remove("dark");
     }
+
+    const unsubscribe = auth.onAuthStateChanged((admin) => {
+      if (admin) {
+        setUser(admin);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => {
+      unsubscribe(); // Unsubscribe when component unmounts
+    };
   }, [user, theme]);
 
   const handleThemeSwitch = () => {
@@ -50,38 +63,42 @@ const AdminHome = () => {
         {/*second raw*/}
         <div className="h-3/5 w-full">
           <div className="flex flex-col ">
-            <div className="hover:bg-secondary-blue p-7 dark:hover:bg-dark-secondary">
-              <a href="#" className="text-3xl text-white font-inter">
+            <a href="#" className="text-3xl text-white font-inter">
+              <div className="hover:bg-secondary-blue p-7 dark:hover:bg-dark-secondary">
                 <FontAwesomeIcon icon={faTableCellsLarge} /> &nbsp;Dashboard
-              </a>
-            </div>
-            <div className="hover:bg-secondary-blue p-7 dark:hover:bg-dark-secondary">
-              <a href="#" className="text-3xl text-white font-inter">
+              </div>
+            </a>
+            <a href="#" className="text-3xl text-white font-inter">
+              <div className="hover:bg-secondary-blue p-7 dark:hover:bg-dark-secondary">
                 <FontAwesomeIcon icon={faCube} /> &nbsp;Management
-              </a>
-            </div>
-            <div className="hover:bg-secondary-blue p-7 dark:hover:bg-dark-secondary">
-              <a href="#" className="text-3xl text-white font-inter">
+              </div>
+            </a>
+            <a href="#" className="text-3xl text-white font-inter">
+              <div className="hover:bg-secondary-blue p-7 dark:hover:bg-dark-secondary">
                 <FontAwesomeIcon icon={faUser} /> &nbsp;Profile
-              </a>
-            </div>
-            <div className="hover:bg-secondary-blue p-7 dark:hover:bg-dark-secondary">
-              <a href="#" className="text-3xl text-white font-inter">
+              </div>
+            </a>
+            <a href="#" className="text-3xl text-white font-inter">
+              <div className="hover:bg-secondary-blue p-7 dark:hover:bg-dark-secondary">
                 <FontAwesomeIcon icon={faGear} /> &nbsp;Settings
-              </a>
-            </div>
+              </div>
+            </a>
           </div>
         </div>
 
         {/*third raw*/}
         <div className="h-1/5 w-full">
-          <div className="flex flex-col p-1 hover:bg-secondary-blue dark:hover:bg-dark-secondary">
-            <div className="p-5">
-              <a href="#" className="text-3xl text-white font-inter">
+          <a
+            href="#"
+            className="text-3xl text-white font-inter"
+            onClick={logout}
+          >
+            <div className="flex flex-col p-1 hover:bg-secondary-blue dark:hover:bg-dark-secondary">
+              <div className="p-5">
                 <FontAwesomeIcon icon={faRightFromBracket} /> &nbsp;Logout
-              </a>
+              </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
 
@@ -90,14 +107,14 @@ const AdminHome = () => {
         {/* nav */}
         <div className="flex bg-red-800 w-full h-1/6 bg-primary-blue opacity-60 dark:bg-black dark:opacity-100">
           {/**Link indicator */}
-          <div className="h-full w-1/4 flex justify-center items-center">
+          <div className="h-full w-1/5 flex justify-center items-center">
             <div className="bg-ternary-blue h-1/2 w-2/3 rounded-3xl opacity-100 flex justify-center items-center drop-shadow-xl dark:bg-dark-ternary">
               <p className="text-black font-bold dark:text-white">Dashboard</p>
             </div>
           </div>
 
           {/**Search bar */}
-          <div className="h-full w-2/4 flex justify-center items-center">
+          <div className="h-full w-2/5 flex justify-center items-center">
             <div className="bg-ternary-blue h-1/2 w-2/3 rounded-3xl opacity-100 flex drop-shadow-xl dark:bg-dark-ternary">
               <div className="h-full w-10/12 rounded-3xl flex justify-center items-center ">
                 Search...
@@ -109,9 +126,9 @@ const AdminHome = () => {
           </div>
 
           {/**Dark mode & user */}
-          <div className="h-full w-1/4 flex">
+          <div className="h-full w-2/5 flex">
             {/**Dark mode button */}
-            <div className="h-full w-1/2 flex justify-center items-center">
+            <div className="h-full w-1/5 flex justify-center items-center">
               <button
                 onClick={handleThemeSwitch}
                 className="bg-bermuda h-1/2 w-1/2 rounded-full flex justify-center items-center drop-shadow-xl hover:bg-black dark:bg-dark-ternary dark:hover:bg-dark-primary"
@@ -120,18 +137,24 @@ const AdminHome = () => {
               </button>
             </div>
             {/**user button */}
-            <div className="relative h-full w-1/2 flex justify-center items-center">
+            <div className="relative h-full w-4/5 flex justify-center items-center">
               <div className="bg-bermuda h-1/2 w-5/6 rounded-full flex justify-center items-center drop-shadow-xl p-3 dark:bg-dark-ternary">
                 <FontAwesomeIcon
                   icon={faUser}
-                  className="w-1/4 font-medium p-1 dark:text-white"
+                  className="w-1/6 font-medium p-1 dark:text-white"
                 />
-                <h1 className="text-black text-center w-2/4 p-2 dark:text-white">
-                  Admin
-                </h1>
+                <h6 className="text-black text-center w-4/6  dark:text-white">
+                  {user ? (
+                    <div className="w-full text-xs font-bold">
+                      {user.email}
+                    </div>
+                  ) : (
+                    <div>No user</div>
+                  )}
+                </h6>
                 <button
                   onClick={() => setIsOpen((prev) => !prev)}
-                  className="p-4 w-1/4 flex items-center justify-between active:text-white"
+                  className="p-4 w-1/6 flex items-center justify-between active:text-white"
                 >
                   {!isOpen ? (
                     <FontAwesomeIcon
@@ -169,7 +192,6 @@ const AdminHome = () => {
         {/* body */}
         <div className=" w-full h-full flex items-center justify-center dark:text-white">
           -body-
-          
         </div>
       </div>
     </div>
