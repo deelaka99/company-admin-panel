@@ -13,19 +13,24 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import logo from "../../assets/images/logo.png";
-import AuthDetails from "../../components/auth/AuthDetails";
+import { auth,logout } from "../../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 const AdminHome = () => {
   const [theme, setTheme] = useState("light");
   const [isOpen, setIsOpen] = useState(false);
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (!user) return navigate("/");
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
-  }, [theme]);
+  }, [user, theme]);
 
   const handleThemeSwitch = () => {
     setTheme(theme === "dark" ? "Light" : "dark");
@@ -150,9 +155,9 @@ const AdminHome = () => {
                       </a>
                     </div>
                     <div className="h-1/2 w-full ">
-                      <a href="#" className="text-red">
+                      <button className="text-red" onClick={logout}>
                         Logout
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>

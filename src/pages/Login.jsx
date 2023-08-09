@@ -1,8 +1,12 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { auth } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,6 +20,10 @@ const Login = () => {
         console.log(error);
       });
   };
+
+  useEffect(()=>{
+    if(user) navigate("/admin-home")
+  },[user]);
 
   return (
     <div className="flex justify-center items-center h-screen w-screen">
@@ -63,7 +71,6 @@ const Login = () => {
                   >
                     Login
                   </button>
-                  
                 </form>
               </div>
             </div>
