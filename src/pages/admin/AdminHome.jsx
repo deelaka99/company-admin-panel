@@ -13,6 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import logo from "../../assets/images/logo.png";
+import AuthDetails from "../../components/auth/AuthDetails";
 
 const AdminHome = () => {
   const [theme, setTheme] = useState("light");
@@ -163,6 +164,7 @@ const AdminHome = () => {
         {/* body */}
         <div className=" w-full h-full flex items-center justify-center dark:text-white">
           -body-
+          
         </div>
       </div>
     </div>
