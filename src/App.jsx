@@ -10,12 +10,13 @@ import Settings from "./pages/settings/Settings";
 function App() {
   return (
     <>
+      
       <Router>
         <div>
           <section>
             <Routes>
               <Route path="/" element={<Login />} />
-              <Route path="/admin" >
+              <Route path="/admin">
                 <Route index path="dashboard" element={<Dashboard />} />
                 <Route path="management" element={<Management />} />
                 <Route path="profile" element={<Profile />} />

@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
   faMagnifyingGlass,
-  faMoon,
   faCaretDown,
   faCaretUp,
 } from "@fortawesome/free-solid-svg-icons";
@@ -12,20 +11,15 @@ import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../firebase";
+import Switcher from "../darkMode/Switcher";
 
 const Navbar = () => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
-  const [theme, setTheme] = useState("light");
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (!user) return navigate("/");
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
 
     const unsubscribe = auth.onAuthStateChanged((admin) => {
       if (admin) {
@@ -38,21 +32,10 @@ const Navbar = () => {
     return () => {
       unsubscribe(); // Unsubscribe when component unmounts
     };
-  }, [user,theme]);
-
-  const handleThemeSwitch = () => {
-    setTheme(theme === "dark" ? "Light" : "dark");
-  };
+  }, [user]);
 
   return (
     <>
-      {/**Link indicator */}
-      <div className="h-full w-1/5 flex justify-center items-center">
-        <div className="bg-ternary-blue h-1/2 w-2/3 rounded-3xl opacity-100 flex justify-center items-center drop-shadow-xl dark:bg-dark-ternary">
-          <p className="text-black font-bold dark:text-white">Dashboard</p>
-        </div>
-      </div>
-
       {/**Search bar */}
       <div className="h-full w-2/5 flex justify-center items-center">
         <div className="bg-ternary-blue h-1/2 w-2/3 rounded-3xl opacity-100 flex drop-shadow-xl dark:bg-dark-ternary">
@@ -65,16 +48,18 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/**space */}
+      <div className="h-full w-1/5">
+        
+      </div>
+
       {/**Dark mode & user */}
       <div className="h-full w-2/5 flex">
         {/**Dark mode button */}
         <div className="h-full w-1/5 flex justify-center items-center">
-          <button
-            onClick={handleThemeSwitch}
-            className="bg-bermuda h-1/2 w-1/2 rounded-full flex justify-center items-center drop-shadow-xl hover:bg-black dark:bg-dark-ternary dark:hover:bg-dark-primary"
-          >
-            <FontAwesomeIcon icon={faMoon} className="text-white h-1/2" />
-          </button>
+          <div className="bg-bermuda dark:bg-dark-secondary rounded-full h-1/2 w-1/2 flex items-center justify-center">
+            <Switcher />
+          </div>
         </div>
         {/**user button */}
         <div className="relative h-full w-4/5 flex justify-center items-center">
