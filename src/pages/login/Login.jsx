@@ -2,7 +2,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { auth } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [user] = useAuthState(auth);
@@ -10,21 +10,26 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [_user, setUser] = useState("");
 
   const signIn = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential);
+        setUser(user);
+        console.log(user);
+        localStorage.setItem("gmail", true);
+        navigate("/admin/dashboard");
       })
       .catch((error) => {
         setError(true);
       });
   };
 
-  useEffect(()=>{
-    if(user) navigate("/admin/dashboard")
-  },[user]);
+  // useEffect(()=>{
+  //   if(user) navigate("/admin/dashboard")
+  // },[_user]);
 
   return (
     <div className="flex justify-center items-center h-screen w-screen">

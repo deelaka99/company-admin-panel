@@ -18,26 +18,26 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    if (!user) return navigate("/");
-
-    const unsubscribe = auth.onAuthStateChanged((admin) => {
-      if (admin) {
-        setUser(admin);
-      } else {
-        setUser(null);
-      }
-    });
-
-    return () => {
-      unsubscribe(); // Unsubscribe when component unmounts
-    };
-  }, [user]);
+  //   useEffect(() => {
+  //     if (!user) return navigate("/");
+  //
+  //     const unsubscribe = auth.onAuthStateChanged((admin) => {
+  //       if (admin) {
+  //         setUser(admin);
+  //       } else {
+  //         setUser(null);
+  //       }
+  //     });
+  //
+  //     return () => {
+  //       unsubscribe(); // Unsubscribe when component unmounts
+  //     };
+  //   }, [user]);
 
   return (
     <>
       {/**Search bar */}
-      <div className="h-full w-2/5 flex justify-center items-center">
+      <div className="h-full w-2/5 flex justify-center items-center ">
         <div className="bg-ternary-blue h-1/2 w-2/3 rounded-3xl opacity-100 flex drop-shadow-xl dark:bg-dark-ternary">
           <div className="h-full w-10/12 rounded-3xl flex justify-center items-center ">
             Search...
@@ -49,9 +49,7 @@ const Navbar = () => {
       </div>
 
       {/**space */}
-      <div className="h-full w-1/5">
-        
-      </div>
+      <div className="h-full w-1/5"></div>
 
       {/**Dark mode & user */}
       <div className="h-full w-2/5 flex">
